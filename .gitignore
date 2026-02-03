@@ -27,10 +27,10 @@ models/
 *.onnx
 
 # Datasets (too large for git)
-data/
-*.csv
-*.txt
-*.zip
+#data/
+#*.csv
+#*.txt
+#*.zip
 
 # Logs
 alerts/
