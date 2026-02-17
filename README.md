@@ -23,22 +23,29 @@ The trained model is exposed through a REST API that supports:
 
 ## Project Structure
 
-COMP8800-project/
-├── app/
+COMP8800-project
+│
+├── app
 │   └── api.py
-├── src/
+│
+├── src
 │   └── train.py
-├── model/
+│
+├── model
 │   └── rf_ids_pipeline.joblib
-├── data/
-│   └── NSL-KDD/
+│
+├── data
+│   └── NSL-KDD
 │       ├── KDDTrain+.txt
 │       └── KDDTest+.txt
-├── tests/
+│
+├── tests
 │   └── make_demo_payloads.py
+│
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
 
 
 ## Setup Instructions
