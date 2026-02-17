@@ -166,15 +166,13 @@ FastAPI Inference Layer
 JSON Response
 
 flowchart TD
-  A[NSL-KDD Dataset<br/>KDDTrain+.txt / KDDTest+.txt] --> B[Preprocessing & Feature Engineering<br/>src/train.py]
-  B --> C[Train Random Forest Pipeline<br/>scikit-learn]
-  C --> D[Save Model Artifact<br/>model/rf_ids_pipeline.joblib]
+  A[NSL-KDD Dataset] --> B[Preprocessing & Feature Engineering]
+  B --> C[Train Random Forest Model]
+  C --> D[Save Model (joblib)]
+  D --> E[FastAPI Inference Layer]
+  E --> F[Prediction + Probability]
+  F --> G[JSON Response]
 
-  D --> E[FastAPI Server<br/>app/api.py]
-  F[Client Request<br/>POST /predict or GET /predict/random] --> E
-  E --> G[Load Model + Build Input DataFrame<br/>f0..f40]
-  G --> H[Model Inference<br/>predict + predict_proba]
-  H --> I[JSON Response<br/>prediction + probability + metadata]
 
 ## Future Improvements
 
