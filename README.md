@@ -165,15 +165,6 @@ FastAPI Inference Layer
     ↓
 JSON Response
 
-flowchart TD
-  A[NSL-KDD Dataset] --> B[Preprocessing & Feature Engineering]
-  B --> C[Train Random Forest Model]
-  C --> D[Save Model (joblib)]
-  D --> E[FastAPI Inference Layer]
-  E --> F[Prediction + Probability]
-  F --> G[JSON Response]
-
-
 ## Future Improvements
 
 - Multi-class attack classification
@@ -182,8 +173,6 @@ flowchart TD
 - Cloud deployment (AWS EC2?Lambda?)
 - Logging and monitoring
 - Frontend dashboard visualization
-
----
 
 ## Author
 Eddy Wu
