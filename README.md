@@ -24,21 +24,16 @@ The trained model is exposed through a REST API that supports:
 ## Project Structure
 
 COMP8800-project/
-- API application layer
     app/                        
         api.py
-- Training and preprocessing logic
     src/                        
         train.py
-- Saved trained models
     model/                      
         rf_ids_pipeline.joblib
-- Saved training datasets
     data/
         NSL-KDD/
             KDDTrain+.txt
             KDDTest+.txt
-- Anything test related
     tests/
         make_demo_payloads.py
     requirements.txt
