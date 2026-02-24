@@ -36,6 +36,10 @@ models/
 alerts/
 *.log
 
+# Docs
+docs/
+out/
+
 # =========================
 # FastAPI / runtime
 # =========================
