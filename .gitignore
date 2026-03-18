@@ -25,6 +25,7 @@ models/
 *.h5
 *.pt
 *.onnx
+*.keras
 
 # Datasets (too large for git)
 #data/
