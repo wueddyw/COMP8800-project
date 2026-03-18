@@ -39,6 +39,7 @@ alerts/
 # Docs
 docs/
 out/
+*.csv
 
 # =========================
 # FastAPI / runtime
