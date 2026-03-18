@@ -1,11 +1,37 @@
 # COMP8800-Machine Learning Intrusion Detection System using API and cloud implementation(IDS)
 
+# Overview
+This project implements a machine learning–based Intrusion Detection System (IDS) using the NSL-KDD dataset.
+The system is designed to detect malicious network activity using a hybrid detection approach, combining:
+
+- Random Forest (RF) for high-confidence detection (signature-like behavior)
+- Deep Neural Network (DNN) for uncertain or complex patterns (anomaly detection)
+
+The system is deployed via FastAPI to support real-time inference through a REST API.
+
 # Note
-This system represents the current prototype implementation of the IDS system. 
+This system represents a work in progress with 1/5 milesontes implemented of the IDS system. 
 Further improvements and architectural changes may be made as model evaluation 
 and experimentation continue in order to determine the most effective approach.
 
-# Prototype
+# Detection Approach
+
+## Random Forest (Stage 1)
+- Handles high-confidence predictions
+- Efficient and interpretable
+- Acts as a signature-like detection layer
+
+## Deep Neural Network (Stage 2)
+- Activated for uncertain RF predictions
+- Learns complex, non-linear attack patterns
+- Represents anomaly detection component
+
+## Hybrid Logic
+- If RF confidence is high → use RF result
+- If RF confidence is low → route to DNN
+
+
+# Prototype (Done)
 It is a machine learning–based Intrusion Detection System (IDS) built using the NSL-KDD dataset.
 The model is trained using a Random Forest classifier and deployed via FastAPI for real-time inference.
 This prototype implements a binary classification IDS that detects whether a network connection is:
@@ -21,7 +47,7 @@ The trained model is exposed through a REST API that supports:
 - Probability confidence output
 - Service health status check
 
-## Project Structure
+## Project Structure (Prototype)
 
 COMP8800-project/
 API application layer
@@ -45,7 +71,57 @@ Anything test related
     .gitignore
     README.md
 
+# Milestone 1 (Current)
+Milestone 1 focuses on improving the baseline model and introducing hybrid architecture components.
 
+## Progress 
+- Built baseline Random Forest IDS prototype
+- Applied hyperparameter tuning to improve model performance
+- Implemented threshold tuning to optimize attack detection
+- Designed and integrated an initial Deep Neural Network (DNN)
+- Developed hybrid routing logic between RF and DNN
+- Evaluated hybrid system performance and identified improvement areas
+
+# Project Structure (Milestone 1)
+COMP8800-project/
+app/                    
+    api.py
+src/                    
+    train_rf_ids.py
+    train_hybrid_ids.py
+model/                
+    rf_ids_pipeline.joblib
+    rf_ids_pipeline_tuned.joblib
+    hybrid_dnn_model.keras
+data/
+    NSL-KDD/
+        KDDTrain+.txt
+        KDDTest+.txt
+tests/
+    make_demo_payloads.py
+out/                    
+docs/                      
+requirements.txt
+README.md
+
+# Model progression
+
+1. Prototype Random Forest
+- Accuracy: 77.6%
+- Attack Recall: 0.63
+
+2. Tuned Random Forest
+- Accuracy: 80.3%
+- Attack Recall: 0.68
+
+3. Tuned RF + Threshold Optimization
+- Accuracy: 83.3%
+- Attack Recall: 0.74
+
+4. Initial Hybrid RF + DNN
+- Successfully integrated DNN into pipeline
+- Hybrid routing implemented (confidence-based)
+- Initial results indicate further tuning required
 
 ## Setup Instructions
 
@@ -68,18 +144,13 @@ Make sure you are in the project root folder:
 
 ## Train the Model
 
-To train the IDS model:
+Train Random Forest (Baseline / Tuned):
 
-    python src/train.py
+    python src/train_rf_ids.py
 
-This will:
+Train Hybrid Model (RF + DNN):
 
-- Load NSL-KDD training data
-- Perform preprocessing
-- Train the Random Forest classifier
-- Save the trained pipeline to:
-
-    model/rf_ids_pipeline.joblib
+    python src/train_hybrid_ids.py  
 
 ## Run the API Server
 
@@ -157,24 +228,34 @@ NSL-KDD Dataset
     ↓
 Data Preprocessing
     ↓
-Feature Engineering
+Random Forest (Stage 1)
     ↓
-Random Forest Classifier
-    ↓
-Model Serialization (joblib)
-    ↓
-FastAPI Inference Layer
-    ↓
-JSON Response
+Confidence Check
+    ↓           ↓
+    High        Low
+    ↓           ↓
+    Output      DNN (Stage 2)
+                ↓
+                Final Prediction
+                ↓
+                FastAPI response
+
+# Limitations (Milestone 1)
+
+- DNN trained on limited uncertain samples
+- No feature scaling applied for neural network
+- Hybrid model does not yet outperform optimized RF
+
 
 ## Future Improvements
 
+- Proper feature scaling for DNN (StandardScaler)
+- Train DNN on larger dataset
 - Multi-class attack classification
-- Real-time packet ingestion
-- Hybrid signature + anomaly detection
-- Cloud deployment (AWS EC2?Lambda?)
-- Logging and monitoring
-- Frontend dashboard visualization
+- Real-time packet capture integration
+- AWS deployment (EC2 / Lambda)
+- Monitoring and logging pipeline
+- Dashboard visualization
 
 ## Author
 Eddy Wu
